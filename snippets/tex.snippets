@@ -1,317 +1,1058 @@
 #PREAMBLE
 #newcommand
-snippet nc \newcommand
-	\newcommand{\\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
+snippet nc
+	\newcommand{\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
 #usepackage
-snippet up \usepackage
+snippet up
 	\usepackage[${1:options}]{${2:package}} ${0}
 #newunicodechar
-snippet nuc \newunicodechar
+snippet nuc
 	\newunicodechar{${1}}{${2:\ensuremath}${3:tex-substitute}}} ${0}
 #DeclareMathOperator
-snippet dmo \DeclareMathOperator
+snippet dmo
 	\DeclareMathOperator{${1}}{${2}} ${0}
 
 #DOCUMENT
 # \begin{}...\end{}
-snippet begin \begin{} ... \end{} block
+snippet thm
+	\begin{theorem}[${1}]${0}
+	\end{theorem}%
+snippet lemma
+	\begin{lemma}[${1}]${0}
+	\end{lemma}%
+snippet corollary
+	\begin{corollary}[${1}]${0}
+	\end{corollary}%
+snippet begin
 	\begin{${1:env}}
 		${0}
-	\end{$1}
+	\end{$1}%
 # Tabular
-snippet tab tabular (or arbitrary) environment
+snippet tab
 	\begin{${1:tabular}}{${2:c}}
-		${0}
+	${0}
 	\end{$1}
-snippet thm thm (or arbitrary) environment with optional argument
-	\begin[${1:author}]{${2:thm}}
-		${0}
-	\end{$2}
-snippet center center environment
+snippet cell
+	\specialcell
+	{${1}
+	}${0}
+#snippet thm
+#	\begin[${1:author}]{${2:thm}}
+#	${0}
+#	\end{$2}
+snippet center
 	\begin{center}
 		${0}
 	\end{center}
 # Align(ed)
-snippet ali align(ed) environment
-	\begin{align${1:ed}}
-		\label{eq:${2}}
-		${0}
+snippet ali
+	\begin{align${1:}}${0}
 	\end{align$1}
+#	\begin{align${1:*}}${0}
+#	\end{align$1}
+#snippet ali
+#	\begin{align${1:ed}}${0}
+#	\end{align$1}
+snippet eq
+	\begin{equation${1:ed}}${0}
+	\end{equation$1}
 # Gather(ed)
-snippet gat gather(ed) environment
+snippet gat
 	\begin{gather${1:ed}}
 		${0}
 	\end{gather$1}
 # Equation
-snippet eq equation environment
-	\begin{equation}
-		${0}
-	\end{equation}
-# Equation
-snippet eql Labeled equation environment
-	\begin{equation}
-		\label{eq:${2}}
-	${0}
-	\end{equation}
-# Equation
-snippet eq* unnumbered equation environment
-	\begin{equation*}
-		${0}
-	\end{equation*}
+#snippet eq
+#	\begin{equation}
+#		${0}
+#	\end{equation}
+## Equation
+#snippet eq*
+#	\begin{equation*}
+#		${0}
+#	\end{equation*}
+snippet usep
+	\usepackage{${1}}${0}
+snippet dsp
+	\displaystyle${0}
 # Unnumbered Equation
-snippet \ unnumbered equation: \[ ... \]
-	\[
-		${0}
+snippet [
+	\[${0}
 	\]
+# Unnumbered inline Equation
+snippet (
+	\(${0}
+	\)
+# Superscript
+snippet ^
+	^
+	{${1}
+	}${0}
+# Subscript
+snippet _
+	_
+	{${1}
+	}${0}
+# Superscript + subscript
+snippet ^_
+	^
+	{
+		${1}
+	}
+	_
+	{${2}
+	}${0}
+# naught
+snippet 0
+	_
+	{
+		0
+	}${0}
+snippet 1
+	_
+	{
+		1
+	}${0}
+# squared
+snippet 2
+	^
+	{
+		2
+	}${0}
+# cubed
+snippet 3
+	^
+	{
+		3
+	}${0}
+# inverse
+snippet -
+	^
+	{
+		-
+		${1:1}
+	}${0}
+# inverse
+#snippet -1
+#	^
+#	{
+#		-
+#		1
+#	}${0}
+# to the n
+snippet i
+	_
+	{
+		${1:i}
+	}${0}
+# to the k
+snippet n
+	^
+	{
+		${1:n}
+	}${0}
+# to the k
+snippet k
+	^
+	{
+		k
+	}${0}
+# transpose
+snippet T
+	^
+	{
+		T
+	}${0}
+# to the -n
+#snippet -n
+#	^
+#	{
+#		-
+#		n
+#	}${0}
+# to the -k
+#snippet -k
+#	^
+#	{
+#		-
+#		k
+#	}${0}
+# exponential
+snippet e
+	e
+	^
+	{${1}
+	}${0}
+# space
+snippet ,
+	\,
+snippet !
+	\!
+snippet ;
+	\;
+snippet :
+	\:
+snippet quad
+	\quad
+snippet perp
+	\perp
+snippet circ
+	\circ
+# align symbol
+snippet &
+	&
+	=${0}
+snippet nl
+	\\
+	&
+	=${0}
+# leftrightarrow
+snippet leftrightarrow
+	\leftrightarrow ${0}
+# rightarrow
+snippet Leftrightarrow
+	\Leftrightarrow
+snippet Rightarrow
+	\Rightarrow
+snippet Leftarrow
+	\Leftarrow
+snippet Longrightarrow
+	\Longrightarrow
+snippet Longleftarrow
+	\Longleftarrow
+snippet leadsto
+	\leadsto
+# xleftrightarrow
+snippet xleftrightarrow
+	\xleftrightarrow
+	{
+		${1}
+	}${0}
+# rightarrow
+snippet xrightarrow
+	\xrightarrow
+	{
+		${1}
+	}${0}
 # Equation array
-snippet eqnarray eqnarray environment
+snippet eqnarray
 	\begin{eqnarray}
 		${0}
 	\end{eqnarray}
-# Label
-snippet lab \label
-	\label{${1:eq:}${2:fig:}${3:tab:}${0}}
 # Enumerate
-snippet enum enumerate environment
+snippet enum
 	\begin{enumerate}
-		\item ${0}
-	\end{enumerate}
-snippet enuma enumerate environment
-	\begin{enumerate}[(a)]
-		\item ${0}
-	\end{enumerate}
-snippet enumi enumerate environment
-	\begin{enumerate}[(i)]
-		\item ${0}
+		\item${0}
 	\end{enumerate}
 # Itemize
-snippet itemize itemize environment
+snippet itemize
 	\begin{itemize}
-		\item ${0}
+		\item${0}
 	\end{itemize}
-snippet item \item
-	\item ${1}
+snippet item
+	\item${1}
 # Description
-snippet desc description environment
+snippet desc
 	\begin{description}
 		\item[${1}] ${0}
 	\end{description}
 # Endless new item
-snippet ]i \item (recursive)
+snippet ]i
 	\item ${1}
-		${0:]i}
+	${0:]i}
 # Matrix
-snippet mat smart matrix environment
-	\begin{${1:p/b/v/V/B/small}matrix}
-		${0}
+snippet mat
+	\begin{${1:p/b/v/V/B/small}matrix}${0}
 	\end{$1matrix}
 # Cases
-snippet cas cases environment
-	\begin{cases}
-		${1:equation}, &\text{ if }${2:case}\\
-		${0}
+snippet cas
+	\begin{cases}${0}
 	\end{cases}
 # Split
-snippet spl split environment
-	\begin{split}
-		${0}
+snippet spl
+	\begin{split}${0}
 	\end{split}
 # Part
-snippet part document \part
-	\part{${1:part name}} % (fold)
-	\label{prt:${2:$1}}
-	${0}
-	% part $2 (end)
+#snippet part
+#	\part{${1:part name}} % (fold)
+#	\label{prt:${2:$1}}${0}
+#	% part $2 (end)
 # Chapter
-snippet cha \chapter
+snippet cha
 	\chapter{${1:chapter name}}
-	\label{cha:${2:$1}}
-	${0}
+	\label{cha:${2:$1}}${0}
 # Section
-snippet sec \section
+snippet sec
 	\section{${1:section name}}
-	\label{sec:${2:$1}}
-	${0}
+	\label{sec:${2:$1}}${0}
 # Section without number
-snippet sec* \section*
+snippet sec*
 	\section*{${1:section name}}
-	\label{sec:${2:$1}}
-	${0}
+	\label{sec:${2:$1}}${0}
 # Sub Section
-snippet sub \subsection
+snippet sub
 	\subsection{${1:subsection name}}
-	\label{sub:${2:$1}}
-	${0}
+	\label{sub:${2:$1}}${0}
 # Sub Section without number
-snippet sub* \subsection*
+snippet sub*
 	\subsection*{${1:subsection name}}
-	\label{sub:${2:$1}}
-	${0}
+	\label{sub:${2:$1}}${0}
 # Sub Sub Section
-snippet subs \subsubsection
+snippet subs
 	\subsubsection{${1:subsubsection name}}
-	\label{ssub:${2:$1}}
-	${0}
+	\label{ssub:${2:$1}}${0}
 # Sub Sub Section without number
-snippet subs* \subsubsection*
+snippet subs*
 	\subsubsection*{${1:subsubsection name}}
-	\label{ssub:${2:$1}}
-	${0}
+	\label{ssub:${2:$1}}${0}
 # Paragraph
-snippet par \paragraph
+snippet par
 	\paragraph{${1:paragraph name}}
-	\label{par:${2:$1}}
-	${0}
+	\label{par:${2:$1}}${0}
 # Sub Paragraph
-snippet subp \subparagraph
+snippet subp
 	\subparagraph{${1:subparagraph name}}
-	\label{subp:${2:$1}}
-	${0}
-snippet ni \noindent
-	\noindent
-	${0}
+	\label{subp:${2:$1}}${0}
+snippet ni
+	\noindent${0}
 #References
-snippet itd description \item
+snippet itd
 	\item[${1:description}] ${0:item}
-snippet figure reference to a figure
+snippet label
+	\label{${1}}${0}
+snippet refeq
+	${1:Eq.}~\eqref{${2:}}${0}
+snippet figure
 	${1:Figure}~\ref{${2:fig:}}
-snippet table reference to a table
+snippet table
 	${1:Table}~\ref{${2:tab:}}
-snippet listing reference to a listing
-	${1:Listing}~\ref{${2:list}}
-snippet section reference to a section
+snippet listing
+	${1:Listing}~\ref{${2:lst}}
+snippet section
 	${1:Section}~\ref{sec:${2}} ${0}
-snippet page reference to a page
+snippet page
 	${1:page}~\pageref{${2}} ${0}
-snippet index \index
+snippet index
 	\index{${1:index}} ${0}
 #Citations
-snippet citen \citen
-	\citen{${1}} ${0}
-# natbib citations
-snippet citep \citep
-	\citep{${1}} ${0}
-snippet citet \citet
-	\citet{${1}} ${0}
-snippet cite \cite[]{}
+snippet citen
+	\cite{${1}}${0}
+# bibtex commands
+snippet citep
+	\citep{${1}}${0}
+snippet citet
+	\citet{${1}}${0}
+snippet cite
 	\cite[${1}]{${2}} ${0}
-snippet citea \citeauthor
-	\citeauthor{${1}} ${0}
-snippet citey \citeyear
-	\citeyear{${1}} ${0}
-snippet fcite \footcite[]{}
+snippet fcite
 	\footcite[${1}]{${2}}${0}
 #Formating text: italic, bold, underline, small capital, emphase ..
-snippet it italic text
-	\textit{${0:text}}
-snippet bf bold face text
-	\textbf{${0:text}}
-snippet under underline text
-	\underline{${0:text}}
-snippet emp emphasize text
-	\emph{${0:text}}
-snippet sc small caps text
-	\textsc{${0:text}}
+snippet it
+	\textit{${0}}
+snippet bf
+	\textbf{${1}}${0}
+snippet mathbf
+	\mathbf
+	{%${1}
+	}${0}
+snippet mathcal
+	\mathcal
+	{%${1}
+	}${0}
+snippet cal
+	\mathcal
+	{%${1}
+	}${0}
+snippet mathrm
+	\mathrm
+	{%${1}
+	}${0}
+snippet rm
+	\mathrm
+	{%${1}
+	}${0}
+snippet mathbb
+	\mathbb
+	{%${1}
+	}${0}
+snippet bb
+	\mathbb
+	{%${1}
+	}${0}
+snippet bold
+	\boldsymbol
+	{%${1}
+	}${0}
+snippet under
+	\underline{${0}}
+snippet underbrace
+	\underbrace
+	{${0}
+	}
+snippet emp
+	\emph{${0}}
+snippet sc
+	\textsc{${0}}
 #Choosing font
-snippet sf sans serife text
-	\textsf{${0:text}}
-snippet rm roman font text
-	\textrm{${0:text}}
-snippet tt typewriter (monospace) text
-	\texttt{${0:text}}
-#Math font
-snippet mf mathfrak
-	\mathfrak{${0:text}}
-snippet mc mathcal
-	\mathcal{${0:text}}
-snippet ms mathscr
-	\mathscr{${0:text}}
+snippet sf
+	\textsf{${0}}
+snippet rm
+	\textrm{${0}}
+snippet tt
+	\texttt{${0}}
 #misc
-snippet ft \footnote
-	\footnote{${0:text}}
-snippet fig figure environment (includegraphics)
+snippet sim
+	\sim${0}
+snippet in
+	\in${0}
+snippet setminus
+	\setminus${0}
+snippet sign
+	\sign${0}
+snippet p
+	\p${0}
+snippet E
+	\E${0}
+snippet V
+	\V${0}
+snippet EE
+	\EE${0}
+snippet kl
+	\kl${0}
+snippet dir
+	\dir${0}
+snippet poi
+	\poi${0}
+snippet cat
+	\cat${0}
+snippet mult
+	\mult${0}
+snippet ind
+	\ind${0}
+snippet forall
+	\forall${0}
+snippet not
+	\not${0}
+snippet lor
+	\lor${0}
+snippet land
+	\land${0}
+snippet lnot
+	\lnot${0}
+snippet ft
+	\footnote
+	{%${0}
+	}
+snippet input
+	\input
+	{
+		${1}
+	}${0}
+snippet fig
 	\begin{figure}
 	\begin{center}
-		\includegraphics[scale=${1}]{Figures/${2}}
-	\end{center}
-	\caption{${3}}
+	    \includegraphics[width=${1}]{figures/${2}}
+	\caption
+	{%
+		${3}%
+	}
 	\label{fig:${4}}
+	\end{center}
 	\end{figure}
 	${0}
-snippet tikz figure environment (tikzpicture)
+snippet tikz
 	\begin{figure}
 	\begin{center}
 	\begin{tikzpicture}[scale=${1:1}]
 		${2}
 	\end{tikzpicture}
-	\end{center}
 	\caption{${3}}
 	\label{fig:${4}}
+	\end{center}
 	\end{figure}
 	${0}
 #math
-snippet stackrel \stackrel{}{}
+snippet stackrel
 	\stackrel{${1:above}}{${2:below}} ${0}
-snippet frac \frac{}{}
-	\frac{${1:num}}{${2:denom}} ${0}
-snippet sum \sum^{}_{}
-	\sum^{${1:n}}_{${2:i=1}} ${0}
-snippet lim \lim_{}
-	\lim_{${1:n \to \infty}} ${0}
-snippet frame frame environment
-	\begin{frame}[${1:t}]{${2:title}}
-		${0}
+snippet frac
+	\frac
+	{${1}
+	}
+	{${2}
+	}${0}
+snippet binom
+	\binom
+	{
+		${1}
+	}
+	{${2}
+	}${0}
+snippet hat
+	\hat
+	{${1}
+	}${0}
+snippet widehat
+	\widehat
+	{${1}
+	}${0}
+snippet tilde
+	\tilde
+	{${1}
+	}${0}
+snippet widetilde
+	\widetilde
+	{${1}
+	}${0}
+snippet sqrt
+	\sqrt
+	{${1}
+	}${0}
+snippet num
+	\num{${1}}${0}
+snippet SI
+	\SI{${1}}{${2}}${0}
+snippet si
+	\si{${1}}${0}
+snippet overline
+	\overline
+	{${1}
+	}${0}
+snippet bar
+	\bar
+	{%${1}
+	}${0}
+snippet text
+	\text
+	{%${1}%
+	}${0}
+snippet url
+	\url
+	{%${1}%
+	}${0}
+snippet sum
+	\sum
+	_
+	{%${1}
+	}${0}
+snippet sumn
+	\sum
+	^
+	{
+		${1:n}
+	}
+	_
+	{
+		${2:k}
+		=
+		${3:1}
+	}${0}
+snippet infsum
+	\sum
+	^
+	{
+		\infty
+	}
+	_
+	{
+		${1:n}
+		=
+		${2:-\infty}
+	}${0}
+snippet prod
+	\prod
+	_
+	{%${1}
+	}${0}
+snippet prodn
+	\prod
+	^
+	{
+		${1:n}
+	}
+	_
+	{
+		${2:i}
+		=
+		${3:1}
+	}${0}
+snippet ast
+	\ast${0}
+snippet int
+	\int${0}
+snippet intn
+	\int
+	^
+	{${1}
+	}
+	_
+	{${2}
+	}${0}
+snippet infint
+	\int
+	^
+	{
+		\infty
+	}
+	_
+	{
+		-
+		\infty
+	}${0}
+snippet lim
+	\lim
+	_
+	{
+		${1:x \to +\infty}
+	}${0}
+snippet frame
+	\begin{frame}{${1}}${0}
 	\end{frame}
-snippet block block environment
+snippet left
+	\left${0}
+snippet right
+	\right${0}
+snippet ll
+	\left(${1}
+	\right)${0}
+snippet lb
+	\left[${1}
+	\right]${0}
+snippet lc
+	\left\{${1}
+	\right\}${0}
+snippet la
+	\langle${1}
+	\rangle${0}
+snippet lp
+	\left|${1}
+	\right|${0}
+snippet |
+	\|${1}
+	\|${0}
+snippet middle
+	\middle|${0}
+snippet vert
+	\Vert${0}
+snippet ln
+	\|${1}
+	\|${0}
+snippet ceil
+	\left\lceil${1}
+	\right\rceil${0}
+snippet floor
+	\left\lfloor${1}
+	\right\rfloor${0}
+snippet mid
+	\middle|${0}
+snippet block
 	\begin{block}{${1:title}}
 	${0}
 	\end{block}
-snippet alert alertblock environment
+snippet alert
 	\begin{alertblock}{${1:title}}
 	${0}
 	\end{alertblock}
-snippet example exampleblock environment
+snippet example
 	\begin{exampleblock}{${1:title}}
 	${0}
 	\end{exampleblock}
-snippet col2 two-column environment
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			${1}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			${0}
-		\end{column}
-	\end{columns}
-snippet \{ \{ \}
-	\\{ ${0} \\}
-#delimiter
-snippet lr left right
-	\left${1} ${0} \right$1
-snippet lr( left( right) 
-	\left( ${0} \right)
-snippet lr| left| right| 
-	\left| ${0} \right|
-snippet lr{ left\{ right\} 
-	\left\\{ ${0} \right\\}
-snippet lr[ left[ right] 
-	\left[ ${0} \right]
-snippet lra langle rangle 
-	\langle ${0} \rangle
-# Code listings
-snippet lst
-	\begin{listing}[language=${1:language}]
-		${0}
-	\end{listing}
-snippet lsi
-	\lstinline|${1}| ${0}
-# Hyperlinks
-snippet url
-	\url{${1}} ${0}
-snippet href
-	\href{${1}}{${2}} ${0}
-# URL from Clipboard.
-snippet urlc
-	\url{`@+`} ${0}
-snippet hrefc
-	\href{`@+`}{${1}} ${0}
+#snippet col2
+#	\begin{columns}
+#		\begin{column}{0.5\textwidth}
+#			${1}
+#		\end{column}
+#		\begin{column}{0.5\textwidth}
+#			${0}
+#		\end{column}
+#	\end{columns}
+# Operators
+snippet cos
+	\cos${0}
+snippet sin
+	\sin${0}
+snippet tan
+	\tan${0}
+snippet arccos
+	\arccos${0}
+snippet arcsin
+	\arcsin${0}
+snippet arctan
+	\arctan${0}
+snippet exp
+	\exp${0}
+snippet log
+	\log${0}
+snippet logn
+	\ln${0}
+snippet min
+	\min${0}
+snippet max
+	\max${0}
+snippet sup
+	\sup${0}
+snippet inf
+	\inf${0}
+snippet argmin
+	\argmin${0}
+snippet argmax
+	\argmax${0}
+snippet minimize
+	\minimize${0}
+snippet maximize
+	\maximize${0}
+snippet st
+	\st${0}
+snippet cup
+	\cup${0}
+snippet cap
+	\cap${0}
+snippet bigcup
+	\bigcup${0}
+snippet bigcap
+	\bigcap${0}
+# Greek letters
+snippet alpha
+	\alpha${0}
+snippet beta
+	\beta${0}
+snippet gamma
+	\gamma${0}
+snippet delta
+	\delta${0}
+snippet epsilon
+	\epsilon${0}
+snippet zeta
+	\zeta${0}
+snippet eta
+	\eta${0}
+snippet theta
+	\theta${0}
+snippet iota
+	\iota${0}
+snippet kappa
+	\kappa${0}
+snippet lambda
+	\lambda${0}
+snippet mu
+	\mu${0}
+snippet nu
+	\nu${0}
+snippet xi
+	\xi${0}
+snippet omicron
+	\omicron${0}
+snippet pi
+	\pi${0}
+snippet rho
+	\rho${0}
+snippet sigma
+	\sigma${0}
+snippet tau
+	\tau${0}
+snippet ypsilon
+	\ypsilon${0}
+snippet phi
+	\phi${0}
+snippet chi
+	\chi${0}
+snippet psi
+	\psi${0}
+snippet omega
+	\omega${0}
+# Uppercase Greek letters
+snippet Alpha
+	\Alpha${0}
+snippet Beta
+	\Beta${0}
+snippet Gamma
+	\Gamma${0}
+snippet Delta
+	\Delta${0}
+snippet Epsilon
+	\Epsilon${0}
+snippet Zeta
+	\Zeta${0}
+snippet Eta
+	\Eta${0}
+snippet Theta
+	\Theta${0}
+snippet Iota
+	\Iota${0}
+snippet Kappa
+	\Kappa${0}
+snippet Lambda
+	\Lambda${0}
+snippet Mu
+	\Mu${0}
+snippet Nu
+	\Nu${0}
+snippet Xi
+	\Xi${0}
+snippet Omicron
+	\Omicron${0}
+snippet Pi
+	\Pi${0}
+snippet Rho
+	\Rho${0}
+snippet Sigma
+	\Sigma${0}
+snippet Tau
+	\Tau${0}
+snippet Ypsilon
+	\Ypsilon${0}
+snippet Phi
+	\Phi${0}
+snippet Chi
+	\Chi${0}
+snippet Psi
+	\Psi${0}
+snippet Omega
+	\Omega${0}
+# Operators etc.
+snippet times
+	\times${0}
+snippet angle
+	\angle${0}
+snippet approx
+	\approx${0}
+snippet leq
+	\leq${0}
+snippet geq
+	\geq${0}
+snippet neq
+	\neq${0}
+snippet triangleq
+	\triangleq${0}
+snippet to
+	\to${0}
+snippet models
+	\models${0}
+snippet gets
+	\gets${0}
+snippet infty
+	\infty${0}
+snippet propto
+	\propto${0}
+snippet ldots
+	\ldots${0}
+snippet dotsc
+	\dotsc${0}
+snippet cdots
+	\cdots${0}
+snippet vdots
+	\vdots${0}
+snippet ddots
+	\ddots${0}
+snippet dd
+	\dd${0}
+snippet partial
+	\partial${0}
+#snippet x
+#	\x${0}
+# DSP snippets
+snippet dt
+	\!
+	\left[${1}
+	\right]${0}
+snippet dts
+	${1}
+	[${2}
+	]${0}
+snippet ct
+	\!
+	\left(${1}
+	\right)${0}
+snippet cts
+	${1}
+	(${2}
+	)${0}
+snippet tr
+	\tr${0}
+snippet diag
+	\diag${0}
+snippet det
+	\det${0}
+snippet mb
+	\mb${0}
+snippet sep
+	\sep${0}
+snippet mse
+	\mse${0}
+snippet xn
+	x
+	\!
+	\left[
+		n
+	\right]${0}
+snippet Xn
+	X
+	\!
+	\left[
+		n
+	\right]${0}
+snippet Xk
+	X
+	\!
+	\left[
+		k
+	\right]${0}
+snippet Hk
+	H
+	\!
+	\left[
+		k
+	\right]${0}
+snippet Yk
+	Y
+	\!
+	\left[
+		k
+	\right]${0}
+snippet W
+	W
+	^
+	{
+		${1:nk}
+	}
+	_
+	{
+		${2:N}
+	}${0}
+snippet yn
+	y
+	\!
+	\left[
+		n
+	\right]${0}
+snippet un
+	u
+	\!
+	\left[
+		n
+	\right]${0}
+snippet hn
+	h
+	\!
+	\left[
+		n
+	\right]${0}
+snippet dn
+	\delta
+	\!
+	\left[
+		n
+	\right]${0}
+snippet xt
+	x
+	\!
+	\left(
+		t
+	\right)${0}
+snippet yt
+	y
+	\!
+	\left(
+		t
+	\right)${0}
+snippet Y
+	Y
+	(
+		e
+		^
+		{
+			j
+			\omega
+		}
+	)${0}
+snippet H
+	H
+	(
+		e
+		^
+		{
+			j
+			\omega
+		}
+	)${0}
+snippet Xz
+	X
+	(
+		z
+	)${0}
+snippet Yz
+	Y
+	(
+		z
+	)${0}
+snippet Hz
+	H
+	(
+		z
+	)${0}
+snippet ejw
+	e
+	^
+	{
+		-
+		j
+		\omega
+		n
+	}${0}
+snippet real
+	\mathcal
+	{
+		R
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
+snippet imag
+	\mathcal
+	{
+		I
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
+snippet F
+	\mathcal
+	{
+		F
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
+snippet Finv
+	\mathcal
+	{
+		F
+	}
+	^
+	{
+		-
+		1
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
+snippet Z
+	\mathcal
+	{
+		Z
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
+snippet Zinv
+	\mathcal
+	{
+		Z
+	}
+	^
+	{
+		-
+		1
+	}
+	\!
+	\left\{${1}
+	\right\}${0}
